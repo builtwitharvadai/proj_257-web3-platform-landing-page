@@ -1,26 +1,22 @@
 {
   "files_created": [
-    "src/components/sections/ConnectCTA.tsx"
+    "src/components/layout/Footer.tsx"
   ],
   "files_modified": [
     "src/App.tsx"
   ],
   "decisions": [
     {
-      "what": "Used @/components/ui/ScrollReveal alias import in ConnectCTA",
-      "why": "Matches the alias convention configured in vite.config.ts and used by ScrollReveal's own internal imports (e.g., @/hooks/useReducedMotion)"
+      "what": "Created Footer.tsx with four link columns, social icon row, copyright and disclaimer rows",
+      "why": "Specification required organized link columns (Product/Resources/Community/Legal), social icons (Twitter, MessageCircle, Send, Github from lucide-react) with min 44x44 touch targets via p-2, and bottom copyright/disclaimer block matching the described class structure."
     },
     {
-      "what": "Used framer-motion to animate background glow opacity in a loop for the subtle pulse",
-      "why": "Specification requested 'animate with subtle pulse' on the absolute gradient/blur background div"
+      "what": "Imported Footer in App.tsx and rendered <Footer /> after </main> within the outer wrapper div",
+      "why": "Specification required Footer to be the last element completing the landing page structure inside the outer min-h-screen wrapper."
     },
     {
-      "what": "Truncated wallet address using first 6 + last 4 characters via a small local helper",
-      "why": "Matches the wallet-address truncation format requested in the specification"
-    },
-    {
-      "what": "Conditionally rendered chain name only when chain?.name is defined",
-      "why": "wagmi's useAccount returns chain as potentially undefined under strict null-checks"
+      "what": "Added aria-label to each social anchor and aria-hidden to the icon",
+      "why": "Icons-only links need accessible names; matches the accessibility patterns already used in Header.tsx."
     }
   ],
   "tools_used": [
