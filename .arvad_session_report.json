@@ -1,27 +1,26 @@
 {
   "files_created": [
-    "src/components/sections/Testimonials.tsx",
-    "src/components/sections/LogoCloud.tsx"
+    "src/components/sections/ConnectCTA.tsx"
   ],
   "files_modified": [
     "src/App.tsx"
   ],
   "decisions": [
     {
-      "what": "Used @/ alias imports for ScrollReveal and GlowCard in Testimonials.tsx and LogoCloud.tsx",
-      "why": "Matches the existing pattern used in src/components/sections/Stats.tsx which imports via @/components/ui/ScrollReveal"
+      "what": "Used @/components/ui/ScrollReveal alias import in ConnectCTA",
+      "why": "Matches the alias convention configured in vite.config.ts and used by ScrollReveal's own internal imports (e.g., @/hooks/useReducedMotion)"
     },
     {
-      "what": "Used relative imports for new section components in App.tsx",
-      "why": "Matches the existing import style in App.tsx where all section components are imported via relative paths"
+      "what": "Used framer-motion to animate background glow opacity in a loop for the subtle pulse",
+      "why": "Specification requested 'animate with subtle pulse' on the absolute gradient/blur background div"
     },
     {
-      "what": "Added id='about' to Testimonials section",
-      "why": "Specification explicitly requires id='about' on the section element"
+      "what": "Truncated wallet address using first 6 + last 4 characters via a small local helper",
+      "why": "Matches the wallet-address truncation format requested in the specification"
     },
     {
-      "what": "Rendered Star icons by iterating testimonial.rating count",
-      "why": "All testimonials have rating: 5, and the spec calls for a 5-star row driven by the rating value"
+      "what": "Conditionally rendered chain name only when chain?.name is defined",
+      "why": "wagmi's useAccount returns chain as potentially undefined under strict null-checks"
     }
   ],
   "tools_used": [

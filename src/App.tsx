@@ -6,6 +6,7 @@ import HowItWorks from './components/sections/HowItWorks';
 import Stats from './components/sections/Stats';
 import LogoCloud from './components/sections/LogoCloud';
 import Testimonials from './components/sections/Testimonials';
+import ConnectCTA from './components/sections/ConnectCTA';
 
 export default function App(): React.ReactElement {
   return (
@@ -18,6 +19,7 @@ export default function App(): React.ReactElement {
         <Stats />
         <LogoCloud />
         <Testimonials />
+        <ConnectCTA />
       </main>
     </div>
   );
