@@ -1,28 +1,41 @@
 {
   "files_created": [
-    "src/components/ui/MorphingButton.tsx"
+    "src/components/ui/WordReveal.tsx",
+    "src/components/sections/Hero.tsx"
   ],
-  "files_modified": [],
+  "files_modified": [
+    "src/App.tsx"
+  ],
   "decisions": [
     {
-      "what": "Used useRef-managed setTimeout with cleanup for state reset",
-      "why": "Prevents leaking pending timers if multiple state transitions occur in sequence."
+      "what": "WordReveal splits text by whitespace and matches highlight words against punctuation-stripped lowercase form",
+      "why": "Keeps headline highlight matching robust if a target word appears with trailing punctuation, while preserving the original word for visual rendering"
     },
     {
-      "what": "Applied success/error background overrides on top of variant styles",
-      "why": "Spec requires green bg for success and red bg for error states regardless of selected variant."
+      "what": "WordReveal renders a screen-reader-only span with the full text and aria-hidden on the animated per-word visual span",
+      "why": "Per spec: assistive tech reads the full headline once instead of word-by-word fragments; matches accessibility-first animation pattern"
     },
     {
-      "what": "Implemented shimmer via absolutely-positioned div with group-hover translate",
-      "why": "Pure Tailwind utilities avoid touching global CSS while still satisfying the primary-variant shimmer requirement; only enabled when not in reduced-motion mode and state is idle."
+      "what": "Hero uses three motion.div orbs with staggered easeInOut scale/opacity loops, disabled when prefers-reduced-motion is set",
+      "why": "Spec calls for animated glow orbs; respecting reduced-motion preference matches the project's motion conventions (mirrors MorphingButton/useReducedMotion usage)"
     },
     {
-      "what": "Added shake animation on error state via motion animate prop",
-      "why": "Task title explicitly mentions error shake state; gated by prefers-reduced-motion via the useReducedMotion hook."
+      "what": "Hero secondary 'Learn More' is a plain styled button rather than a MorphingButton",
+      "why": "Spec describes it as a 'Secondary button' that scrolls to #features without async state; MorphingButton's onClick contract is async/Promise-based, so a regular button matches the intended UX"
+    },
+    {
+      "what": "Subheadline and CTA delays (1.5s, 2s) are zeroed when prefers-reduced-motion is true",
+      "why": "Avoids long invisible delays for users with reduced motion preferences while preserving the staggered choreography for everyone else"
+    },
+    {
+      "what": "App.tsx main no longer applies pt-16 md:pt-20",
+      "why": "Per spec: Hero handles its own spacing via min-h-screen and the fixed header naturally overlays the hero"
     }
   ],
   "tools_used": [
     "Read",
-    "Write"
+    "Write",
+    "Edit",
+    "Bash"
   ]
 }
