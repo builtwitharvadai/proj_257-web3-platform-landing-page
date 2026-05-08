@@ -1,6 +1,7 @@
 import { Star } from 'lucide-react';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { GlowCard } from '@/components/ui/GlowCard';
+import { LazyImage } from '../ui/LazyImage';
 
 interface Testimonial {
   quote: string;
@@ -54,11 +55,11 @@ export default function Testimonials() {
           </h2>
         </ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
-          {testimonials.map((testimonial, index) => (
-            <ScrollReveal key={testimonial.author} delay={index * 0.15}>
+          {testimonials.map((t, index) => (
+            <ScrollReveal key={t.author} delay={index * 0.15}>
               <GlowCard>
                 <div className="flex items-center gap-1">
-                  {Array.from({ length: testimonial.rating }).map((_, i) => (
+                  {Array.from({ length: t.rating }).map((_, i) => (
                     <Star
                       key={i}
                       className="h-5 w-5 fill-yellow-400 text-yellow-400"
@@ -66,21 +67,20 @@ export default function Testimonials() {
                   ))}
                 </div>
                 <blockquote className="text-zinc-300 mt-4">
-                  &ldquo;{testimonial.quote}&rdquo;
+                  &ldquo;{t.quote}&rdquo;
                 </blockquote>
                 <div className="flex items-center gap-3 mt-6">
-                  <img
-                    src={testimonial.avatar}
-                    alt={testimonial.author}
-                    loading="lazy"
-                    className="rounded-full h-12 w-12 object-cover"
+                  <LazyImage
+                    src={t.avatar}
+                    alt={t.author}
+                    width={48}
+                    height={48}
+                    className="rounded-full object-cover"
                   />
                   <div>
-                    <div className="font-semibold text-white">
-                      {testimonial.author}
-                    </div>
+                    <div className="font-semibold text-white">{t.author}</div>
                     <div className="text-sm text-zinc-500">
-                      {testimonial.role} at {testimonial.company}
+                      {t.role} at {t.company}
                     </div>
                   </div>
                 </div>
