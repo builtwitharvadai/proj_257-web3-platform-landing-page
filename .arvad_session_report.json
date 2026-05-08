@@ -1,33 +1,41 @@
 {
   "files_created": [
-    "src/index.css",
-    "src/hooks/useReducedMotion.ts",
-    "src/components/ui/ScrollReveal.tsx",
-    "src/vite-env.d.ts",
-    "src/App.tsx"
+    ".env.example",
+    "src/config/web3.ts",
+    "src/components/providers/Web3Provider.tsx"
   ],
-  "files_modified": [],
+  "files_modified": [
+    "src/main.tsx"
+  ],
   "decisions": [
     {
-      "what": "Imported Inter via Google Fonts at top of index.css",
-      "why": "Specification said to include @font-face or Google Fonts import for Inter if not handled in HTML; index.html does not load Inter, so the @import covers the requirement."
+      "what": "Used getDefaultConfig from @rainbow-me/rainbowkit for wagmi setup",
+      "why": "Specification explicitly requires getDefaultConfig with appName, projectId, and chains; it auto-includes MetaMask, WalletConnect, and Coinbase Wallet connectors via RainbowKit defaults."
     },
     {
-      "what": "Used '@/hooks/useReducedMotion' alias in ScrollReveal.tsx",
-      "why": "tsconfig.app.json defines the '@/*' path alias mapped to './src/*', matching project conventions."
+      "what": "Added `as const` to chains tuple in src/config/web3.ts",
+      "why": "Preserves precise tuple typing for wagmi/RainbowKit which expects a readonly non-empty chain tuple."
     },
     {
-      "what": "Typed ScrollReveal ease as a 4-tuple [number, number, number, number]",
-      "why": "Framer Motion's ease prop expects a fixed-length tuple for cubic-bezier curves; widening to number[] causes type errors under strict mode."
+      "what": "Set ssr: false on the wagmi config",
+      "why": "This is a Vite SPA (no SSR); explicit flag avoids hydration-related warnings from getDefaultConfig defaults."
     },
     {
-      "what": "Used getInitialPreference for SSR-safe initial state in useReducedMotion",
-      "why": "Avoids running matchMedia during SSR and prevents a hydration flash by reading the actual preference synchronously when window is available."
+      "what": "Created QueryClient as a module-level singleton in Web3Provider.tsx",
+      "why": "Specification requires the QueryClient to be created once at module scope so it isn't re-created on every render."
     },
     {
-      "what": "Added scrollbar-hide utility plus dark-themed default scrollbar styling",
-      "why": "Spec asked for a scrollbar-hide utility for custom scrollbar styling on dark theme."
+      "what": "Configured darkTheme with accentColor #8b5cf6, accentColorForeground white, borderRadius 'medium'",
+      "why": "Matches the app accent color from tailwind.config.ts and the explicit RainbowKit theme parameters in the specification."
+    },
+    {
+      "what": "Wrapped <App /> with <Web3Provider> inside <StrictMode> in src/main.tsx",
+      "why": "Specification mandates the provider hierarchy StrictMode > Web3Provider > App so wagmi/RainbowKit context is available throughout the tree."
     }
   ],
-  "tools_used": ["Read", "Write", "Bash"]
+  "tools_used": [
+    "Read",
+    "Write",
+    "Edit"
+  ]
 }
