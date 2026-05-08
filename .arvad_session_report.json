@@ -1,36 +1,28 @@
 {
   "files_created": [
-    "src/components/layout/Header.tsx"
+    "src/components/ui/MorphingButton.tsx"
   ],
-  "files_modified": [
-    "src/App.tsx"
-  ],
+  "files_modified": [],
   "decisions": [
     {
-      "what": "Used ConnectButton with responsive showBalance/chainStatus/accountStatus objects on desktop and showBalance={false} on mobile drawer",
-      "why": "Spec required ConnectButton with showBalance={false} on smaller screens; RainbowKit's responsive prop object cleanly satisfies this without rendering two separate ConnectButton instances on desktop"
+      "what": "Used useRef-managed setTimeout with cleanup for state reset",
+      "why": "Prevents leaking pending timers if multiple state transitions occur in sequence."
     },
     {
-      "what": "Locked body scroll while mobile drawer is open and exposed dialog/aria-modal semantics",
-      "why": "Drawer covers viewport below header; preventing background scroll matches expected mobile drawer UX without adding new dependencies"
+      "what": "Applied success/error background overrides on top of variant styles",
+      "why": "Spec requires green bg for success and red bg for error states regardless of selected variant."
     },
     {
-      "what": "Mobile drawer anchored with fixed left-0 right-0 top-16 bottom-0 rather than fixed inset-0",
-      "why": "Spec says 'below header' — anchoring top to header height keeps the hamburger toggle visible and tappable while the drawer is open"
+      "what": "Implemented shimmer via absolutely-positioned div with group-hover translate",
+      "why": "Pure Tailwind utilities avoid touching global CSS while still satisfying the primary-variant shimmer requirement; only enabled when not in reduced-motion mode and state is idle."
     },
     {
-      "what": "Smooth-scroll handler resolves the anchor target via getElementById and falls back to default link behavior if the element is missing",
-      "why": "Sections (#features, #how-it-works, #about) are not yet implemented; graceful fallback avoids preventing default for non-existent targets"
-    },
-    {
-      "what": "Wrapped existing placeholder content in <main className='pt-16 md:pt-20'> inside the new outer <div>",
-      "why": "Spec required the App shell shape <div><Header /><main className='pt-16 md:pt-20'>...</main></div> so the fixed header doesn't overlap content"
+      "what": "Added shake animation on error state via motion animate prop",
+      "why": "Task title explicitly mentions error shake state; gated by prefers-reduced-motion via the useReducedMotion hook."
     }
   ],
   "tools_used": [
     "Read",
-    "Bash",
-    "Write",
-    "Edit"
+    "Write"
   ]
 }
