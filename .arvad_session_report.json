@@ -1,0 +1,42 @@
+{
+  "files_created": [
+    "package.json",
+    "tsconfig.json",
+    "tsconfig.app.json",
+    "tsconfig.node.json",
+    "vite.config.ts",
+    "postcss.config.js",
+    "tailwind.config.ts",
+    "index.html",
+    "src/main.tsx"
+  ],
+  "files_modified": [
+    ".gitignore"
+  ],
+  "decisions": [
+    {
+      "what": "Replaced Python-oriented .gitignore with Node.js/Vite/TypeScript-oriented entries while preserving the arvad_task_files/ entry.",
+      "why": "Spec required a full replacement optimized for a Vite + React + TypeScript project; the arvad_task_files/ ignore is project-specific tooling that should remain ignored."
+    },
+    {
+      "what": "Used postcss ^8.4.39 in package.json devDependencies.",
+      "why": "Spec listed postcss@^10.4.19, which does not exist; PostCSS' current major line is 8.x. Tailwind CSS 3.4 also requires postcss ^8. Using a real, compatible version keeps the project installable."
+    },
+    {
+      "what": "Added explicit lib, useDefineForClassFields, esModuleInterop, resolveJsonModule, and baseUrl in tsconfig.app.json beyond the bare flags listed.",
+      "why": "These are required for the React/Vite app to type-check correctly with the strict, jsx: react-jsx, paths, and bundler module-resolution settings the spec mandates."
+    },
+    {
+      "what": "Used manualChunks in vite.config.ts to split react, web3, query, and motion bundles.",
+      "why": "Spec asked for build.rollupOptions configured for code splitting; splitting heavy Web3 and animation deps keeps initial load fast on the landing page."
+    },
+    {
+      "what": "Threw an explicit error in src/main.tsx when #root is missing rather than using a non-null assertion.",
+      "why": "Provides an actionable runtime error if index.html is misconfigured, satisfying the input-validation requirement at the application boundary."
+    }
+  ],
+  "tools_used": [
+    "Read",
+    "Write"
+  ]
+}
