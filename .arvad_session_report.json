@@ -1,41 +1,32 @@
 {
   "files_created": [
-    "src/components/ui/WordReveal.tsx",
-    "src/components/sections/Hero.tsx"
+    "src/components/ui/GlowCard.tsx",
+    "src/components/sections/Features.tsx"
   ],
   "files_modified": [
     "src/App.tsx"
   ],
   "decisions": [
     {
-      "what": "WordReveal splits text by whitespace and matches highlight words against punctuation-stripped lowercase form",
-      "why": "Keeps headline highlight matching robust if a target word appears with trailing punctuation, while preserving the original word for visual rendering"
+      "what": "Used named export for GlowCard with ReactNode/className props and added aria-hidden to decorative gradient layers.",
+      "why": "Spec requested named export and decorative layers should not be exposed to assistive tech."
     },
     {
-      "what": "WordReveal renders a screen-reader-only span with the full text and aria-hidden on the animated per-word visual span",
-      "why": "Per spec: assistive tech reads the full headline once instead of word-by-word fragments; matches accessibility-first animation pattern"
+      "what": "Used '@/' alias imports in Features.tsx for ScrollReveal and GlowCard.",
+      "why": "vite.config.ts and existing components like MorphingButton consistently use the '@/' alias for src imports."
     },
     {
-      "what": "Hero uses three motion.div orbs with staggered easeInOut scale/opacity loops, disabled when prefers-reduced-motion is set",
-      "why": "Spec calls for animated glow orbs; respecting reduced-motion preference matches the project's motion conventions (mirrors MorphingButton/useReducedMotion usage)"
+      "what": "Assigned feature.icon to a capitalized local Icon variable inside the map.",
+      "why": "JSX requires capitalized identifiers for component types; lowercase 'feature.icon' would render as a DOM tag."
     },
     {
-      "what": "Hero secondary 'Learn More' is a plain styled button rather than a MorphingButton",
-      "why": "Spec describes it as a 'Secondary button' that scrolls to #features without async state; MorphingButton's onClick contract is async/Promise-based, so a regular button matches the intended UX"
-    },
-    {
-      "what": "Subheadline and CTA delays (1.5s, 2s) are zeroed when prefers-reduced-motion is true",
-      "why": "Avoids long invisible delays for users with reduced motion preferences while preserving the staggered choreography for everyone else"
-    },
-    {
-      "what": "App.tsx main no longer applies pt-16 md:pt-20",
-      "why": "Per spec: Hero handles its own spacing via min-h-screen and the fixed header naturally overlays the hero"
+      "what": "Default-exported Features and rendered it directly after Hero inside main.",
+      "why": "Spec required default export and structure: Header > main > Hero > Features."
     }
   ],
   "tools_used": [
     "Read",
     "Write",
-    "Edit",
-    "Bash"
+    "Edit"
   ]
 }
