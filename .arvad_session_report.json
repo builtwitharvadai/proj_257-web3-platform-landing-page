@@ -1,22 +1,31 @@
 {
   "files_created": [
-    "src/components/sections/HowItWorks.tsx"
+    "src/components/ui/AnimatedCounter.tsx",
+    "src/components/sections/Stats.tsx"
   ],
   "files_modified": [
     "src/App.tsx"
   ],
   "decisions": [
     {
-      "what": "Wrapped each Lucide icon in a flex container inside the rounded-2xl bg badge",
-      "why": "Spec requested fixed w-16 h-16 box for the icon. Centering the icon ensures proper visual alignment regardless of intrinsic SVG size."
+      "what": "Multiplied by 10^decimals before Math.floor in the rAF step, then divided back",
+      "why": "Spec defines a 'decimals' prop used by the Uptime stat (value 99.9). Literal Math.floor(eased * end) would discard the decimal portion and make the prop meaningless."
     },
     {
-      "what": "Used React.Fragment to render connector elements between steps",
-      "why": "Spec calls for connector divs between (not inside) step cards while keeping a flex layout. Fragments avoid wrapper divs that would break the flex flow."
+      "what": "Used toLocaleString with minimumFractionDigits/maximumFractionDigits set to decimals",
+      "why": "Ensures intermediate and final values render with the configured precision (e.g. 99.9% rather than 99%)."
     },
     {
-      "what": "Implemented top/bottom gradient borders as absolutely positioned 1px gradient strips",
-      "why": "Spec asked for 'subtle top/bottom gradient borders' on the section. Pseudo-1px gradients render reliably across browsers without relying on border-image quirks."
+      "what": "Imported ScrollReveal and AnimatedCounter as named imports",
+      "why": "ScrollReveal.tsx uses 'export function ScrollReveal'; AnimatedCounter is exposed the same way. Default-style imports would fail to resolve."
+    },
+    {
+      "what": "Omitted the unused 'useCallback' import mentioned in the spec",
+      "why": "tsconfig.app.json sets noUnusedLocals: true; an unused import would break the strict build."
+    },
+    {
+      "what": "Added a className prop to AnimatedCounter",
+      "why": "Stats.tsx applies 'text-4xl md:text-5xl font-bold text-white' to the counter, which requires the rendered span to accept className."
     }
   ],
   "tools_used": [
