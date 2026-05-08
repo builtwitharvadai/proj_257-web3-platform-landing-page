@@ -1,40 +1,35 @@
 {
   "files_created": [
-    ".env.example",
-    "src/config/web3.ts",
-    "src/components/providers/Web3Provider.tsx"
+    "src/components/layout/Header.tsx"
   ],
   "files_modified": [
-    "src/main.tsx"
+    "src/App.tsx"
   ],
   "decisions": [
     {
-      "what": "Used getDefaultConfig from @rainbow-me/rainbowkit for wagmi setup",
-      "why": "Specification explicitly requires getDefaultConfig with appName, projectId, and chains; it auto-includes MetaMask, WalletConnect, and Coinbase Wallet connectors via RainbowKit defaults."
+      "what": "Used ConnectButton with responsive showBalance/chainStatus/accountStatus objects on desktop and showBalance={false} on mobile drawer",
+      "why": "Spec required ConnectButton with showBalance={false} on smaller screens; RainbowKit's responsive prop object cleanly satisfies this without rendering two separate ConnectButton instances on desktop"
     },
     {
-      "what": "Added `as const` to chains tuple in src/config/web3.ts",
-      "why": "Preserves precise tuple typing for wagmi/RainbowKit which expects a readonly non-empty chain tuple."
+      "what": "Locked body scroll while mobile drawer is open and exposed dialog/aria-modal semantics",
+      "why": "Drawer covers viewport below header; preventing background scroll matches expected mobile drawer UX without adding new dependencies"
     },
     {
-      "what": "Set ssr: false on the wagmi config",
-      "why": "This is a Vite SPA (no SSR); explicit flag avoids hydration-related warnings from getDefaultConfig defaults."
+      "what": "Mobile drawer anchored with fixed left-0 right-0 top-16 bottom-0 rather than fixed inset-0",
+      "why": "Spec says 'below header' — anchoring top to header height keeps the hamburger toggle visible and tappable while the drawer is open"
     },
     {
-      "what": "Created QueryClient as a module-level singleton in Web3Provider.tsx",
-      "why": "Specification requires the QueryClient to be created once at module scope so it isn't re-created on every render."
+      "what": "Smooth-scroll handler resolves the anchor target via getElementById and falls back to default link behavior if the element is missing",
+      "why": "Sections (#features, #how-it-works, #about) are not yet implemented; graceful fallback avoids preventing default for non-existent targets"
     },
     {
-      "what": "Configured darkTheme with accentColor #8b5cf6, accentColorForeground white, borderRadius 'medium'",
-      "why": "Matches the app accent color from tailwind.config.ts and the explicit RainbowKit theme parameters in the specification."
-    },
-    {
-      "what": "Wrapped <App /> with <Web3Provider> inside <StrictMode> in src/main.tsx",
-      "why": "Specification mandates the provider hierarchy StrictMode > Web3Provider > App so wagmi/RainbowKit context is available throughout the tree."
+      "what": "Wrapped existing placeholder content in <main className='pt-16 md:pt-20'> inside the new outer <div>",
+      "why": "Spec required the App shell shape <div><Header /><main className='pt-16 md:pt-20'>...</main></div> so the fixed header doesn't overlap content"
     }
   ],
   "tools_used": [
     "Read",
+    "Bash",
     "Write",
     "Edit"
   ]
