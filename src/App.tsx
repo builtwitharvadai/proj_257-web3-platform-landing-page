@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/layout/Header';
 import Hero from './components/sections/Hero';
 import Features from './components/sections/Features';
+import HowItWorks from './components/sections/HowItWorks';
 
 export default function App(): React.ReactElement {
   return (
@@ -10,6 +11,7 @@ export default function App(): React.ReactElement {
       <main>
         <Hero />
         <Features />
+        <HowItWorks />
       </main>
     </div>
   );

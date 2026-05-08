@@ -1,27 +1,22 @@
 {
   "files_created": [
-    "src/components/ui/GlowCard.tsx",
-    "src/components/sections/Features.tsx"
+    "src/components/sections/HowItWorks.tsx"
   ],
   "files_modified": [
     "src/App.tsx"
   ],
   "decisions": [
     {
-      "what": "Used named export for GlowCard with ReactNode/className props and added aria-hidden to decorative gradient layers.",
-      "why": "Spec requested named export and decorative layers should not be exposed to assistive tech."
+      "what": "Wrapped each Lucide icon in a flex container inside the rounded-2xl bg badge",
+      "why": "Spec requested fixed w-16 h-16 box for the icon. Centering the icon ensures proper visual alignment regardless of intrinsic SVG size."
     },
     {
-      "what": "Used '@/' alias imports in Features.tsx for ScrollReveal and GlowCard.",
-      "why": "vite.config.ts and existing components like MorphingButton consistently use the '@/' alias for src imports."
+      "what": "Used React.Fragment to render connector elements between steps",
+      "why": "Spec calls for connector divs between (not inside) step cards while keeping a flex layout. Fragments avoid wrapper divs that would break the flex flow."
     },
     {
-      "what": "Assigned feature.icon to a capitalized local Icon variable inside the map.",
-      "why": "JSX requires capitalized identifiers for component types; lowercase 'feature.icon' would render as a DOM tag."
-    },
-    {
-      "what": "Default-exported Features and rendered it directly after Hero inside main.",
-      "why": "Spec required default export and structure: Header > main > Hero > Features."
+      "what": "Implemented top/bottom gradient borders as absolutely positioned 1px gradient strips",
+      "why": "Spec asked for 'subtle top/bottom gradient borders' on the section. Pseudo-1px gradients render reliably across browsers without relying on border-image quirks."
     }
   ],
   "tools_used": [
