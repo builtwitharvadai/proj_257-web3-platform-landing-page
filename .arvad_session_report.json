@@ -1,36 +1,31 @@
 {
   "files_created": [
-    "src/components/ui/AnimatedCounter.tsx",
-    "src/components/sections/Stats.tsx"
+    "src/components/sections/Testimonials.tsx",
+    "src/components/sections/LogoCloud.tsx"
   ],
   "files_modified": [
     "src/App.tsx"
   ],
   "decisions": [
     {
-      "what": "Multiplied by 10^decimals before Math.floor in the rAF step, then divided back",
-      "why": "Spec defines a 'decimals' prop used by the Uptime stat (value 99.9). Literal Math.floor(eased * end) would discard the decimal portion and make the prop meaningless."
+      "what": "Used @/ alias imports for ScrollReveal and GlowCard in Testimonials.tsx and LogoCloud.tsx",
+      "why": "Matches the existing pattern used in src/components/sections/Stats.tsx which imports via @/components/ui/ScrollReveal"
     },
     {
-      "what": "Used toLocaleString with minimumFractionDigits/maximumFractionDigits set to decimals",
-      "why": "Ensures intermediate and final values render with the configured precision (e.g. 99.9% rather than 99%)."
+      "what": "Used relative imports for new section components in App.tsx",
+      "why": "Matches the existing import style in App.tsx where all section components are imported via relative paths"
     },
     {
-      "what": "Imported ScrollReveal and AnimatedCounter as named imports",
-      "why": "ScrollReveal.tsx uses 'export function ScrollReveal'; AnimatedCounter is exposed the same way. Default-style imports would fail to resolve."
+      "what": "Added id='about' to Testimonials section",
+      "why": "Specification explicitly requires id='about' on the section element"
     },
     {
-      "what": "Omitted the unused 'useCallback' import mentioned in the spec",
-      "why": "tsconfig.app.json sets noUnusedLocals: true; an unused import would break the strict build."
-    },
-    {
-      "what": "Added a className prop to AnimatedCounter",
-      "why": "Stats.tsx applies 'text-4xl md:text-5xl font-bold text-white' to the counter, which requires the rendered span to accept className."
+      "what": "Rendered Star icons by iterating testimonial.rating count",
+      "why": "All testimonials have rating: 5, and the spec calls for a 5-star row driven by the rating value"
     }
   ],
   "tools_used": [
     "Read",
-    "Write",
-    "Edit"
+    "Write"
   ]
 }

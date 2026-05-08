@@ -4,6 +4,8 @@ import Hero from './components/sections/Hero';
 import Features from './components/sections/Features';
 import HowItWorks from './components/sections/HowItWorks';
 import Stats from './components/sections/Stats';
+import LogoCloud from './components/sections/LogoCloud';
+import Testimonials from './components/sections/Testimonials';
 
 export default function App(): React.ReactElement {
   return (
@@ -14,6 +16,8 @@ export default function App(): React.ReactElement {
         <Features />
         <HowItWorks />
         <Stats />
+        <LogoCloud />
+        <Testimonials />
       </main>
     </div>
   );
